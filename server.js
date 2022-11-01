@@ -8,6 +8,7 @@ const {json} = require('body-parser');
 const {typeDefs, resolvers} = require('./schemas');
 const {authMiddleware} = require('./utils/auth');
 const db = require('./config/connection');
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 
