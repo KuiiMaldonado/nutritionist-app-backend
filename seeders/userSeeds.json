@@ -1,0 +1,38 @@
+[
+  {
+    "username": "usuario1",
+    "email": "test@email.com",
+    "password": "thepassword",
+    "firstName": "Pepe",
+    "lastName": "La Rana",
+    "isAdmin": true
+  },
+  {
+    "username": "usuario2",
+    "email": "tes2@email.com",
+    "password": "thepassword",
+    "firstName": "Pepe",
+    "lastName": "La Rana 2"
+  },
+  {
+    "username": "usuario3",
+    "email": "test3@email.com",
+    "password": "thepassword",
+    "firstName": "Pepe",
+    "lastName": "La Rana 3"
+  },
+  {
+    "username": "usuario4",
+    "email": "test4@email.com",
+    "password": "thepassword",
+    "firstName": "Pepe",
+    "lastName": "La Rana 4"
+  },
+  {
+    "username": "usuario5",
+    "email": "test5@email.com",
+    "password": "thepassword",
+    "firstName": "Pepe",
+    "lastName": "La Rana 5"
+  }
+]
