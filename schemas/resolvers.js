@@ -39,6 +39,15 @@ const resolvers = {
 
             const token = signToken(user);
             return {token, user};
+        },
+
+        updateProfile: async (parent, {userInput}, context) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: context.user._id},
+                {$set: userInput},
+                {new: true}
+            );
+            return updatedUser;
         }
     }
 }
