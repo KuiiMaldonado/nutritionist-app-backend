@@ -10,8 +10,11 @@ const resolvers = {
             }
         },
 
-        users: async () => {
-            return User.find();
+        users: async (parent, args, context) => {
+            if (context.user) {
+                console.log(context.user.isAdmin);
+            }
+            return User.find().sort({firstName:'desc'});
         }
     },
 
