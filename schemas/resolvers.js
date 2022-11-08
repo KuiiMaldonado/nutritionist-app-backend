@@ -11,8 +11,19 @@ const resolvers = {
         },
 
         users: async (parent, args, context) => {
-            if (context.user) {
-                console.log(context.user.isAdmin);
+            if (!context.user) {
+                throw new GraphQLError('Access denied!', {
+                    extensions: {
+                        code: 'FORBIDDEN'
+                    }
+                });
+            }
+            if (!context.user.isAdmin) {
+                throw new GraphQLError('Access denied!', {
+                    extensions: {
+                        code: 'FORBIDDEN'
+                    }
+                });
             }
             return User.find().sort({firstName:'desc'});
         }
