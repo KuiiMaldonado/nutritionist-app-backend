@@ -8,6 +8,14 @@ const resolvers = {
             if (context.user) {
                 return User.findOne({_id: context.user._id});
             }
+            else
+            {
+                throw new GraphQLError('Access denied!', {
+                    extensions: {
+                        code: 'FORBIDDEN'
+                    }
+                });
+            }
         },
 
         users: async (parent, args, context) => {
