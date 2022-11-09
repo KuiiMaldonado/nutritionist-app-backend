@@ -33,6 +33,7 @@ const typeDefs = `#graphql
     type Mutation {
         login(email: String!, password: String!):Auth
         addProfile(username: String!, email: String!, password: String!):User
+        deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
     }
 `;
