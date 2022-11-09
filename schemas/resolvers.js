@@ -1,6 +1,7 @@
 const {User} = require('../models');
 const {signToken} = require('../utils/auth');
 const {GraphQLError} = require('graphql');
+const {contentDisposition} = require("express/lib/utils");
 
 const resolvers = {
     Query: {
@@ -69,6 +70,11 @@ const resolvers = {
                 {$set: userInput},
                 {new: true}
             );
+            return updatedUser;
+        },
+
+        deleteProfile: async (parent, {userId}) => {
+            const updatedUser = await User.findByIdAndDelete(userId);
             return updatedUser;
         }
     }
