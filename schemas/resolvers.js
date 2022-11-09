@@ -64,6 +64,11 @@ const resolvers = {
             return {token, user};
         },
 
+        addProfile: async (parent, {userInput}) => {
+            const user = await User.create(userInput);
+            return user;
+        },
+
         updateProfile: async (parent, {userInput}, context) => {
             const updatedUser = await User.findOneAndUpdate(
                 {_id: context.user._id},
