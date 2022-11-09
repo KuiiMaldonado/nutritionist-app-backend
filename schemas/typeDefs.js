@@ -23,6 +23,7 @@ const typeDefs = `#graphql
         firstName: String
         lastName: String
         password: String
+        isAdmin: Boolean
     }
 
     type Query {
@@ -32,7 +33,7 @@ const typeDefs = `#graphql
 
     type Mutation {
         login(email: String!, password: String!):Auth
-        addProfile(userInput: updatedProfileInput, isAdmin:Boolean):User
+        addProfile(userInput: updatedProfileInput):User
         deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
     }
