@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
+const measureSchema = require('./Measure');
 
 const userSchema = new Schema(
     {
@@ -35,7 +36,8 @@ const userSchema = new Schema(
             type: Boolean,
             required: true,
             default: false
-        }
+        },
+        userMeasures: [measureSchema],
     },
     {
         toJSON: {
