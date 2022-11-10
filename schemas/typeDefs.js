@@ -2,14 +2,25 @@ const {ApolloServer} = require('@apollo/server');
 
 const typeDefs = `#graphql
     type User {
-        _id: ID!,
-        username: String!,
-        email: String!,
-        password: String!,
-        firstName: String!,
-        lastName: String!,
-        birthDate: String,
+        _id: ID!
+        username: String!
+        email: String!
+        password: String!
+        firstName: String!
+        lastName: String!
+        birthDate: String
         isAdmin: Boolean!
+        userMeasures: [Measure]
+    }
+
+    type Measure {
+        _id: ID!
+        date: String!
+        weight: String!
+        bodyFatPercentage: String!
+        leanBodyWeight: String!
+        bodyFat: String!
+        bodyType: String!
     }
 
     type Auth {
