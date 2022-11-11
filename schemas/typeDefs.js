@@ -48,6 +48,7 @@ const typeDefs = `#graphql
         addProfile(userInput: updatedProfileInput):User
         deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
+        deleteMeasure(measureId: ID!):User
     }
 `;
 
