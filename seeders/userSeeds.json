@@ -22,6 +22,14 @@
         "leanBodyWeight": "62.26",
         "bodyFat": "13.54",
         "bodyType": "Durnin"
+      },
+      {
+        "date": "10/11/2022",
+        "weight": "74.80",
+        "bodyFatPercentage": "21.11%",
+        "leanBodyWeight": "59.01",
+        "bodyFat": "15.79",
+        "bodyType": "Durnin"
       }
     ]
   },
@@ -30,7 +38,25 @@
     "email": "tes2@email.com",
     "password": "thepassword",
     "firstName": "Pepe",
-    "lastName": "La Rana 2"
+    "lastName": "La Rana 2",
+    "userMeasures": [
+      {
+        "date": "10/07/2022",
+        "weight": "74.80",
+        "bodyFatPercentage": "21.11%",
+        "leanBodyWeight": "59.01",
+        "bodyFat": "15.79",
+        "bodyType": "Durnin"
+      },
+      {
+        "date": "09/09/2022",
+        "weight": "75.80",
+        "bodyFatPercentage": "17.86%",
+        "leanBodyWeight": "62.26",
+        "bodyFat": "13.54",
+        "bodyType": "Durnin"
+      }
+    ]
   },
   {
     "username": "usuario3",
