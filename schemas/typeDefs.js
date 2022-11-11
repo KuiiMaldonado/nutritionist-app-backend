@@ -39,7 +39,7 @@ const typeDefs = `#graphql
 
     type Query {
         me: User
-        user: User!
+        user(userId: ID): User!
         users: [User]!
     }
 

@@ -19,6 +19,11 @@ const resolvers = {
             }
         },
 
+        user: async (parent, {userId}) => {
+            const user = await User.findById(userId);
+            return user;
+        },
+
         users: async (parent, args, context) => {
             if (!context.user) {
                 throw new GraphQLError('Access denied!', {
