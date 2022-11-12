@@ -1,7 +1,6 @@
 const {User} = require('../models');
 const {signToken} = require('../utils/auth');
 const {GraphQLError} = require('graphql');
-const {contentDisposition} = require("express/lib/utils");
 
 const resolvers = {
     Query: {
@@ -40,6 +39,11 @@ const resolvers = {
                 });
             }
             return User.find().sort({firstName:'desc'});
+        },
+
+        getUserMeasures: async (parent, {userId}) => {
+            const measures = await User.findById(userId);
+            return measures;
         }
     },
 
@@ -85,6 +89,15 @@ const resolvers = {
 
         deleteProfile: async (parent, {userId}) => {
             const updatedUser = await User.findByIdAndDelete(userId);
+            return updatedUser;
+        },
+
+        deleteMeasure: async (parent, {measureId, userId}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$pull: {userMeasures: {_id: measureId}}},
+                {new: true}
+            );
             return updatedUser;
         }
     }

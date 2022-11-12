@@ -2,25 +2,25 @@ const {ApolloServer} = require('@apollo/server');
 
 const typeDefs = `#graphql
     type User {
-        _id: ID!
-        username: String!
-        email: String!
-        password: String!
-        firstName: String!
-        lastName: String!
+        _id: ID
+        username: String
+        email: String
+        password: String
+        firstName: String
+        lastName: String
         birthDate: String
-        isAdmin: Boolean!
+        isAdmin: Boolean
         userMeasures: [Measure]
     }
 
     type Measure {
-        _id: ID!
-        date: String!
-        weight: String!
-        bodyFatPercentage: String!
-        leanBodyWeight: String!
-        bodyFat: String!
-        bodyType: String!
+        _id: ID
+        date: String
+        weight: String
+        bodyFatPercentage: String
+        leanBodyWeight: String
+        bodyFat: String
+        bodyType: String
     }
 
     type Auth {
@@ -41,6 +41,7 @@ const typeDefs = `#graphql
         me: User
         user(userId: ID): User!
         users: [User]!
+        getUserMeasures(userId: ID!): User!
     }
 
     type Mutation {
@@ -48,7 +49,7 @@ const typeDefs = `#graphql
         addProfile(userInput: updatedProfileInput):User
         deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
-        deleteMeasure(measureId: ID!):User
+        deleteMeasure(measureId: String!, userId: String!):User
     }
 `;
 
