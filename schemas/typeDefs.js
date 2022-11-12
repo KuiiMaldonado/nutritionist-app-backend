@@ -37,6 +37,15 @@ const typeDefs = `#graphql
         isAdmin: Boolean
     }
 
+    input addMeasureInput {
+        date: String
+        weight: String
+        bodyFatPercentage: String
+        leanBodyWeight: String
+        bodyFat: String
+        bodyType: String
+    }
+
     type Query {
         me: User
         user(userId: ID): User!
@@ -49,6 +58,7 @@ const typeDefs = `#graphql
         addProfile(userInput: updatedProfileInput):User
         deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
+        addMeasure(measureInput: addMeasureInput):User
         deleteMeasure(measureId: String!, userId: String!):User
     }
 `;
