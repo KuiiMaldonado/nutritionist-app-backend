@@ -92,6 +92,15 @@ const resolvers = {
             return updatedUser;
         },
 
+        addMeasure: async (parent, {userId, measureInput}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$addToSet: {userMeasures: {measureInput}}},
+                {new: true}
+            );
+            return updatedUser;
+        },
+
         deleteMeasure: async (parent, {measureId, userId}) => {
             const updatedUser = await User.findOneAndUpdate(
                 {_id: userId},
