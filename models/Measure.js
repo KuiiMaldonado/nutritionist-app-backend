@@ -1,5 +1,4 @@
 const {Schema} = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
 
 const measureSchema = new Schema(
     {
@@ -28,11 +27,6 @@ const measureSchema = new Schema(
             required: true
         }
     },
-    {
-        toJSON: {
-            virtuals: true,
-        }
-    }
 );
 
 module.exports = measureSchema;
