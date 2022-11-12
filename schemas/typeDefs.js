@@ -58,7 +58,7 @@ const typeDefs = `#graphql
         addProfile(userInput: updatedProfileInput):User
         deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
-        addMeasure(measureInput: addMeasureInput):User
+        addMeasure(userId: String!, measureInput: addMeasureInput):User
         deleteMeasure(measureId: String!, userId: String!):User
     }
 `;
