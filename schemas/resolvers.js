@@ -74,8 +74,16 @@ const resolvers = {
         },
 
         addProfile: async (parent, {userInput}) => {
-            const user = await User.create(userInput);
-            return user;
+            try {
+                const user = await User.create(userInput);
+                return user;
+            } catch (error) {
+                if (error.name === 'MongoServerError') {
+                    if (error.code === 11000) {
+                        throw new GraphQLError(`${error.keyValue[Object.keys(error.keyValue)]} already in use`);
+                    }
+                }
+            }
         },
 
         updateProfile: async (parent, {userInput}, context) => {
