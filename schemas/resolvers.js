@@ -95,7 +95,7 @@ const resolvers = {
         addMeasure: async (parent, {userId, measureInput}) => {
             const updatedUser = await User.findOneAndUpdate(
                 {_id: userId},
-                {$addToSet: {userMeasures: {measureInput}}},
+                {$addToSet: {userMeasures: measureInput}},
                 {new: true}
             );
             return updatedUser;
