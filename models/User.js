@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
+const measureSchema = require('./Measure');
 
 const userSchema = new Schema(
     {
@@ -35,7 +36,8 @@ const userSchema = new Schema(
             type: Boolean,
             required: true,
             default: false
-        }
+        },
+        userMeasures: [measureSchema],
     },
     {
         toJSON: {
@@ -54,9 +56,11 @@ userSchema.pre('save', async function(next) {
 });
 
 userSchema.pre('findOneAndUpdate', async function(next) {
-    if (this._update.$set.password) {
-        const saltRounds = 15;
-        this._update.$set.password = await bcrypt.hash(this._update.$set.password, saltRounds);
+    if (this._update.hasOwnProperty('$set')) {
+        if (this._update.$set.hasOwnProperty('password')) {
+            const saltRounds = 15;
+            this._update.$set.password = await bcrypt.hash(this._update.$set.password, saltRounds);
+        }
     }
     next();
 })
