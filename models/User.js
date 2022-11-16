@@ -2,6 +2,7 @@ const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
 const measureSchema = require('./Measure');
 const dietSchema = require('./Diet');
+const trainingSchema = require('./Training');
 
 const userSchema = new Schema(
     {
@@ -40,6 +41,7 @@ const userSchema = new Schema(
         },
         userMeasures: [measureSchema],
         userDiets: [dietSchema],
+        userTrainings: [trainingSchema],
     },
     {
         toJSON: {
