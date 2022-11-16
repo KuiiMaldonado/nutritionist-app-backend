@@ -8,7 +8,8 @@ const dietSchema = new Schema(
         },
         fileName: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         }
     }
 );
