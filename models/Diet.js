@@ -9,7 +9,6 @@ const dietSchema = new Schema(
         fileName: {
             type: String,
             required: true,
-            unique: true
         }
     }
 );

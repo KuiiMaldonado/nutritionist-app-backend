@@ -9,7 +9,6 @@ const trainingSchema = new Schema(
         fileName: {
             type: String,
             required: true,
-            unique: true
         }
     }
 );
