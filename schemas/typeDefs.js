@@ -66,6 +66,7 @@ const typeDefs = `#graphql
         users: [User]!
         getUserMeasures(userId: ID!): User!
         getUserDiets(userId: ID!): User!
+        getUserTrainings(userId: ID!): User!
     }
 
     type Mutation {
@@ -76,6 +77,7 @@ const typeDefs = `#graphql
         addMeasure(userId: String!, measureInput: addMeasureInput):User
         deleteMeasure(measureId: String!, userId: String!):User
         addDiet(userId: String!, eTag: String!, fileName: String!):User
+        addTraining(userId: String!, eTag: String!, fileName: String!): User
     }
 `;
 
