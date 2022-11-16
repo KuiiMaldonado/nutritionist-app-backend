@@ -2,7 +2,8 @@ const router = require('express').Router();
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
-const {S3Client, PutObjectCommand} = require('@aws-sdk/client-s3');
+const {S3Client, PutObjectCommand, GetObjectCommand} = require('@aws-sdk/client-s3');
+const {getSignedUrl} = require('@aws-sdk/s3-request-presigner');
 require('dotenv').config();
 
 const credentials = {
@@ -14,12 +15,23 @@ const s3Client = new S3Client({
     region: process.env.AWS_REGION
 });
 
+router.get('/downloadDiet', async (req, res) => {
+    console.log('Get diet route');
+    const getObject = new GetObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: 'diets/636f098983954fa8931408a8/Cuitlahuac Maldonado (2007.2 kcal) 10-11-22.pdf'
+    });
+    const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*5});
+    console.log(url);
+    res.status(200).json({message: 'Get diet'});
+});
+
 router.post('/uploadDiet', upload.single('uploaded-diet'), async (req, res) => {
     console.log('Upload diet route');
     console.log(req.file);
     const putObject = new PutObjectCommand({
         Bucket: process.env.AWS_S3_BUCKET,
-        Key: `diets/${req.file.originalname}`,
+        Key: `diets/636f098983954fa8931408a8/${req.file.originalname}`,
         Body: req.file.buffer
     });
     const response =  await s3Client.send(putObject);
