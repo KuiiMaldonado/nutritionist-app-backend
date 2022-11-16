@@ -11,6 +11,7 @@ const typeDefs = `#graphql
         birthDate: String
         isAdmin: Boolean
         userMeasures: [Measure]
+        userDiets: [Diet]
     }
 
     type Measure {
@@ -66,6 +67,7 @@ const typeDefs = `#graphql
         updateProfile(userInput: updatedProfileInput):User
         addMeasure(userId: String!, measureInput: addMeasureInput):User
         deleteMeasure(measureId: String!, userId: String!):User
+        addDiet(userId: String!, eTag: String!, fileName: String!):User
     }
 `;
 
