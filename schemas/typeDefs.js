@@ -23,6 +23,12 @@ const typeDefs = `#graphql
         bodyType: String
     }
 
+    type Diet {
+        _id: ID
+        eTag: String
+        fileName: String
+    }
+
     type Auth {
         token: ID!
         user: User
