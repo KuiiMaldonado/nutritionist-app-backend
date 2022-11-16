@@ -12,6 +12,7 @@ const typeDefs = `#graphql
         isAdmin: Boolean
         userMeasures: [Measure]
         userDiets: [Diet]
+        userTrainings: [Training]
     }
 
     type Measure {
@@ -25,6 +26,12 @@ const typeDefs = `#graphql
     }
 
     type Diet {
+        _id: ID
+        eTag: String
+        fileName: String
+    }
+
+    type Training {
         _id: ID
         eTag: String
         fileName: String
