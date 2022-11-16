@@ -44,6 +44,16 @@ const resolvers = {
         getUserMeasures: async (parent, {userId}) => {
             const measures = await User.findById(userId);
             return measures;
+        },
+
+        getUserDiets: async (parent, {userId}) => {
+            const diets = await User.findById(userId);
+            return diets;
+        },
+
+        getUserTrainings: async (parent, {userId}) => {
+            const trainings = await User.findById(userId);
+            return trainings;
         }
     },
 
