@@ -58,6 +58,7 @@ const typeDefs = `#graphql
         user(userId: ID): User!
         users: [User]!
         getUserMeasures(userId: ID!): User!
+        getUserDiets(userId: ID!): User!
     }
 
     type Mutation {
