@@ -135,6 +135,33 @@ const resolvers = {
                 {new: true}
             );
             return updatedUser;
+        },
+
+        deleteDiet: async (parent, {userId, dietId}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$pull: {userDiets: {_id: dietId}}},
+                {new: true}
+            );
+            return updatedUser
+        },
+
+        addTraining: async (parent, {userId, eTag, fileName}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$addToSet: {userTrainings: {eTag, fileName}}},
+                {new: true}
+            );
+            return updatedUser;
+        },
+
+        deleteTraining: async (parent, {userId, dietId}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$pull: {userTrainings: {_id: dietId}}},
+                {new: true}
+            );
+            return updatedUser
         }
     }
 }
