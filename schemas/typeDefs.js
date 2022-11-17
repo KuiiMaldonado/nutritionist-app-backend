@@ -79,7 +79,7 @@ const typeDefs = `#graphql
         addDiet(userId: String!, eTag: String!, fileName: String!):User
         deleteDiet(userId: String!, dietId: String!):User
         addTraining(userId: String!, eTag: String!, fileName: String!):User
-        deleteTraining(userId: String!, dietId: String!):User
+        deleteTraining(userId: String!, trainingId: String!):User
     }
 `;
 
