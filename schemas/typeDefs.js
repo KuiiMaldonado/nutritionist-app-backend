@@ -77,7 +77,9 @@ const typeDefs = `#graphql
         addMeasure(userId: String!, measureInput: addMeasureInput):User
         deleteMeasure(measureId: String!, userId: String!):User
         addDiet(userId: String!, eTag: String!, fileName: String!):User
-        addTraining(userId: String!, eTag: String!, fileName: String!): User
+        deleteDiet(userId: String!, dietId: String!):User
+        addTraining(userId: String!, eTag: String!, fileName: String!):User
+        deleteTraining(userId: String!, dietId: String!):User
     }
 `;
 
