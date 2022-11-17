@@ -27,16 +27,14 @@ router.get('/downloadDiet', async (req, res) => {
 });
 
 router.post('/uploadDiet', upload.single('uploaded-diet'), async (req, res) => {
-    console.log('Upload diet route');
-    console.log(req.file);
     const putObject = new PutObjectCommand({
         Bucket: process.env.AWS_S3_BUCKET,
-        Key: `diets/636f098983954fa8931408a8/${req.file.originalname}`,
+        Key: `diets/${req.body.userId}/${req.file.originalname}`,
         Body: req.file.buffer
     });
     const response =  await s3Client.send(putObject);
     console.log(response);
-    res.status(200).json({message: 'Upload diet'});
+    res.status(response.$metadata.httpStatusCode).json({response: response, fileName: req.file.originalname});
 });
 
 router.post('/uploadTraining', (req, res) => {
