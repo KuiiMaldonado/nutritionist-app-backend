@@ -155,10 +155,10 @@ const resolvers = {
             return updatedUser;
         },
 
-        deleteTraining: async (parent, {userId, dietId}) => {
+        deleteTraining: async (parent, {userId, trainingId}) => {
             const updatedUser = await User.findOneAndUpdate(
                 {_id: userId},
-                {$pull: {userTrainings: {_id: dietId}}},
+                {$pull: {userTrainings: {_id: trainingId}}},
                 {new: true}
             );
             return updatedUser
