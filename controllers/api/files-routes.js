@@ -33,7 +33,6 @@ router.post('/uploadDiet', upload.single('uploaded-diet'), async (req, res) => {
         Body: req.file.buffer
     });
     const response =  await s3Client.send(putObject);
-    console.log(response);
     res.status(response.$metadata.httpStatusCode).json({response: response, fileName: req.file.originalname});
 });
 
