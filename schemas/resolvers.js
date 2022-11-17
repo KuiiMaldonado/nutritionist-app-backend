@@ -126,6 +126,15 @@ const resolvers = {
                 {new: true}
             );
             return updatedUser;
+        },
+
+        addDiet: async (parent, {userId, eTag, fileName}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$addToSet: {userDiets: {eTag, fileName}}},
+                {new: true}
+            );
+            return updatedUser;
         }
     }
 }
