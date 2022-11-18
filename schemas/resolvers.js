@@ -161,7 +161,7 @@ const resolvers = {
                 {$pull: {userTrainings: {_id: trainingId}}},
                 {new: true}
             );
-            return updatedUser
+            return updatedUser;
         }
     }
 }
