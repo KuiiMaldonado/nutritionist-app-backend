@@ -48,9 +48,37 @@ router.post('/deleteDiet', async (req, res) => {
     res.status(response.$metadata.httpStatusCode).send();
 });
 
-router.post('/uploadTraining', (req, res) => {
-    console.log('Upload training route');
-    res.status(200).json({message: 'Upload training'});
+router.post('/downloadTraining', async (req, res) => {
+    try {
+        const getObject = new GetObjectCommand({
+            Bucket: process.env.AWS_S3_BUCKET,
+            Key: `trainings/${req.body.userId}/${req.body.fileName}`
+        });
+        const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*5});
+        res.status(200).json({download: url});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: error.message});
+    }
+});
+
+router.post('/uploadTraining', async (req, res) => {
+    const putObject = new PutObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: `trainings/${req.body.userId}/${req.file.originalname}`,
+        Body: req.file.buffer
+    });
+    const response =  await s3Client.send(putObject);
+    res.status(response.$metadata.httpStatusCode).json({response: response, fileName: req.file.originalname});
+});
+
+router.post('/deleteTraining', async (req, res) => {
+    const deleteObject = new DeleteObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: `trainings/${req.body.userId}/${req.body.fileName}`
+    });
+    const response = await s3Client.send(deleteObject);
+    res.status(response.$metadata.httpStatusCode).send();
 });
 
 router.post('/uploadProfileImage', (req, res) => {
