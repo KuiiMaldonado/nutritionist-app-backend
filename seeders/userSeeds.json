@@ -31,6 +31,34 @@
         "bodyFat": "15.79",
         "bodyType": "Durnin"
       }
+    ],
+    "userDiets": [
+      {
+        "eTag": "kgdsfubsdf687351we",
+        "fileName": "Pepe La Rana Diet(16-11-2022)"
+      },
+      {
+        "eTag": "kgdsfubsdf687351we",
+        "fileName": "Pepe La Rana Diet(16-12-2022)"
+      },
+      {
+        "eTag": "kgdsfubsdf687351we",
+        "fileName": "Pepe La Rana Diet(16-01-2023)"
+      }
+    ],
+    "userTrainings": [
+      {
+        "eTag": "kgdsfubsdf687351we",
+        "fileName": "Pepe La Rana Training(16-11-2022)"
+      },
+      {
+        "eTag": "kgdsfubsdf687351we",
+        "fileName": "Pepe La Rana Training(16-12-2022)"
+      },
+      {
+        "eTag": "kgdsfubsdf687351we",
+        "fileName": "Pepe La Rana Training(16-01-2023)"
+      }
     ]
   },
   {

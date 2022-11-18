@@ -44,6 +44,16 @@ const resolvers = {
         getUserMeasures: async (parent, {userId}) => {
             const measures = await User.findById(userId);
             return measures;
+        },
+
+        getUserDiets: async (parent, {userId}) => {
+            const diets = await User.findById(userId);
+            return diets;
+        },
+
+        getUserTrainings: async (parent, {userId}) => {
+            const trainings = await User.findById(userId);
+            return trainings;
         }
     },
 
@@ -113,6 +123,42 @@ const resolvers = {
             const updatedUser = await User.findOneAndUpdate(
                 {_id: userId},
                 {$pull: {userMeasures: {_id: measureId}}},
+                {new: true}
+            );
+            return updatedUser;
+        },
+
+        addDiet: async (parent, {userId, eTag, fileName}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$addToSet: {userDiets: {eTag, fileName}}},
+                {new: true}
+            );
+            return updatedUser;
+        },
+
+        deleteDiet: async (parent, {userId, dietId}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$pull: {userDiets: {_id: dietId}}},
+                {new: true}
+            );
+            return updatedUser
+        },
+
+        addTraining: async (parent, {userId, eTag, fileName}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$addToSet: {userTrainings: {eTag, fileName}}},
+                {new: true}
+            );
+            return updatedUser;
+        },
+
+        deleteTraining: async (parent, {userId, trainingId}) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: userId},
+                {$pull: {userTrainings: {_id: trainingId}}},
                 {new: true}
             );
             return updatedUser;
