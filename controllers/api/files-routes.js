@@ -62,7 +62,7 @@ router.post('/downloadTraining', async (req, res) => {
     }
 });
 
-router.post('/uploadTraining', async (req, res) => {
+router.post('/uploadTraining', upload.single('uploaded-training'), async (req, res) => {
     const putObject = new PutObjectCommand({
         Bucket: process.env.AWS_S3_BUCKET,
         Key: `trainings/${req.body.userId}/${req.file.originalname}`,
