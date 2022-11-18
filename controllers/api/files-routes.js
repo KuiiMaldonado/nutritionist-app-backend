@@ -4,6 +4,9 @@ const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
 const {S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand} = require('@aws-sdk/client-s3');
 const {getSignedUrl} = require('@aws-sdk/s3-request-presigner');
+const https = require("https");
+const axios = require("axios");
+const fs = require("fs");
 require('dotenv').config();
 
 const credentials = {
@@ -15,15 +18,18 @@ const s3Client = new S3Client({
     region: process.env.AWS_REGION
 });
 
-router.get('/downloadDiet', async (req, res) => {
-    console.log('Get diet route');
-    const getObject = new GetObjectCommand({
-        Bucket: process.env.AWS_S3_BUCKET,
-        Key: 'diets/636f098983954fa8931408a8/Cuitlahuac Maldonado (2007.2 kcal) 10-11-22.pdf'
-    });
-    const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*5});
-    console.log(url);
-    res.status(200).json({message: 'Get diet'});
+router.post('/downloadDiet', async (req, res) => {
+    try {
+        const getObject = new GetObjectCommand({
+            Bucket: process.env.AWS_S3_BUCKET,
+            Key: `diets/${req.body.userId}/${req.body.fileName}`
+        });
+        const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*5});
+        res.status(200).json({download: url});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: error.message});
+    }
 });
 
 router.post('/uploadDiet', upload.single('uploaded-diet'), async (req, res) => {
@@ -42,7 +48,6 @@ router.post('/deleteDiet', async (req, res) => {
         Key: `diets/${req.body.userId}/${req.body.fileName}`
     });
     const response = await s3Client.send(deleteObject);
-    console.log(response);
     res.status(response.$metadata.httpStatusCode).send();
 });
 
