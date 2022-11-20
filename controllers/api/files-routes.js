@@ -81,9 +81,15 @@ router.post('/deleteTraining', async (req, res) => {
     res.status(response.$metadata.httpStatusCode).send();
 });
 
-router.post('/uploadProfileImage', (req, res) => {
-    console.log('Upload image route');
-    res.status(200).json({message: 'Upload image'});
+router.post('/uploadProfilePicture', upload.single('uploaded-picture'), async (req, res) => {
+    const putObject = new PutObjectCommand({
+        Bucket: process.env.AWS_S3_PICTURES_BUCKET,
+        Key: `${req.body.userId}-profilePicture`,
+        Body: req.file.buffer
+    });
+    const response =  await s3Client.send(putObject);
+    console.log(response.Location);
+    res.status(response.$metadata.httpStatusCode).json({response: response, fileName: req.file.originalname});
 });
 
 module.exports = router;
