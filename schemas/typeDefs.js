@@ -10,6 +10,7 @@ const typeDefs = `#graphql
         lastName: String
         birthDate: String
         isAdmin: Boolean
+        profilePictureURL: String
         userMeasures: [Measure]
         userDiets: [Diet]
         userTrainings: [Training]
