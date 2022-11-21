@@ -39,6 +39,9 @@ const userSchema = new Schema(
             required: true,
             default: false
         },
+        profilePictureURL: {
+            type: String
+        },
         userMeasures: [measureSchema],
         userDiets: [dietSchema],
         userTrainings: [trainingSchema],
