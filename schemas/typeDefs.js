@@ -82,6 +82,7 @@ const typeDefs = `#graphql
         addTraining(userId: String!, eTag: String!, fileName: String!):User
         deleteTraining(userId: String!, trainingId: String!):User
         updateProfilePicture(url: String!):User
+        deleteProfilePicture:User
     }
 `;
 
