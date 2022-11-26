@@ -162,6 +162,24 @@ const resolvers = {
                 {new: true}
             );
             return updatedUser;
+        },
+
+        updateProfilePicture: async (parent, {url}, context) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: context.user._id},
+                {$set: {profilePictureURL: url}},
+                {new: true}
+            );
+            return updatedUser;
+        },
+
+        deleteProfilePicture: async (parent, args, context) => {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: context.user._id},
+                {$unset: {profilePictureURL: ''}},
+                {new: true}
+            );
+            return updatedUser;
         }
     }
 }

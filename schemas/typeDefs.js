@@ -10,6 +10,7 @@ const typeDefs = `#graphql
         lastName: String
         birthDate: String
         isAdmin: Boolean
+        profilePictureURL: String
         userMeasures: [Measure]
         userDiets: [Diet]
         userTrainings: [Training]
@@ -80,6 +81,8 @@ const typeDefs = `#graphql
         deleteDiet(userId: String!, dietId: String!):User
         addTraining(userId: String!, eTag: String!, fileName: String!):User
         deleteTraining(userId: String!, trainingId: String!):User
+        updateProfilePicture(url: String!):User
+        deleteProfilePicture:User
     }
 `;
 

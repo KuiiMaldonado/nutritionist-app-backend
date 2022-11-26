@@ -21,7 +21,7 @@ router.post('/downloadDiet', async (req, res) => {
             Bucket: process.env.AWS_S3_BUCKET,
             Key: `diets/${req.body.userId}/${req.body.fileName}`
         });
-        const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*5});
+        const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*3});
         res.status(200).json({download: url});
     } catch (error) {
         console.error(error);
@@ -54,7 +54,7 @@ router.post('/downloadTraining', async (req, res) => {
             Bucket: process.env.AWS_S3_BUCKET,
             Key: `trainings/${req.body.userId}/${req.body.fileName}`
         });
-        const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*5});
+        const url = await getSignedUrl(s3Client, getObject, {expiresIn: 60*3});
         res.status(200).json({download: url});
     } catch (error) {
         console.error(error);
@@ -81,9 +81,29 @@ router.post('/deleteTraining', async (req, res) => {
     res.status(response.$metadata.httpStatusCode).send();
 });
 
-router.post('/uploadProfileImage', (req, res) => {
-    console.log('Upload image route');
-    res.status(200).json({message: 'Upload image'});
+router.post('/uploadProfilePicture', upload.single('uploaded-picture'), async (req, res) => {
+    try {
+        const putObject = new PutObjectCommand({
+            Bucket: process.env.AWS_S3_BUCKET,
+            Key: `profile-pictures/${req.body.userId}-profilePicture`,
+            Body: req.file.buffer
+        });
+        const response =  await s3Client.send(putObject);
+        const url = process.env.AWS_S3_PICTURES_BUCKET + req.body.userId + '-profilePicture';
+        res.status(response.$metadata.httpStatusCode).json({location: url, fileName: req.file.originalname});
+    } catch (error) {
+        res.status(500).json(error);
+    }
+
+});
+
+router.post('/deleteProfilePicture', async (req, res) => {
+    const deleteObject = new DeleteObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Key: `profile-pictures/${req.body.userId}-profilePicture`
+    });
+    const response = await s3Client.send(deleteObject);
+    res.status(response.$metadata.httpStatusCode).send();
 });
 
 module.exports = router;
