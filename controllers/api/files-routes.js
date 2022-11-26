@@ -100,7 +100,7 @@ router.post('/uploadProfilePicture', upload.single('uploaded-picture'), async (r
 router.post('/deleteProfilePicture', async (req, res) => {
     const deleteObject = new DeleteObjectCommand({
         Bucket: process.env.AWS_S3_BUCKET,
-        Key: `profile-pictures/${req.body.userId}-profile-picture`
+        Key: `profile-pictures/${req.body.userId}-profilePicture`
     });
     const response = await s3Client.send(deleteObject);
     res.status(response.$metadata.httpStatusCode).send();
