@@ -13,7 +13,7 @@ router.post('/validateCaptcha', async (req, res) => {
             }
         });
         if (response.data.success) {
-            res.status(200);
+            res.status(200).send();
         }
         else {
             res.status(500).json({message: 'Failed to validate the captcha'});
