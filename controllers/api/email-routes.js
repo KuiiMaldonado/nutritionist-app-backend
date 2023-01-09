@@ -24,4 +24,24 @@ router.post('/sendContactEmail', async (req, res) => {
     }
 });
 
+router.post('/resetPasswordEmail', async (req, res) => {
+   try {
+       const response = await axios.post('https://api.emailjs.com/api/v1.0/email/send', {
+           service_id: 'contact_form_service',
+           template_id: 'forgot_password_template',
+           user_id: process.env.EMAILJS_USER_ID,
+           accessToken: process.env.EMAILJS_TOKEN,
+           template_params: req.body
+       }, {
+           headers: {
+               'content-type': 'application/json'
+           }
+       });
+       res.status(200).json({message: 'Email sent successfully'});
+   } catch (error) {
+       console.error(error);
+       res.status(error.response.status).json(error.response.data);
+   }
+});
+
 module.exports = router;
