@@ -72,7 +72,7 @@ const typeDefs = `#graphql
 
     type Mutation {
         login(email: String!, password: String!):Auth
-        resetPassword(email: String!, password: String!):User
+        resetPassword(email: String!, newPassword: String!):User
         addProfile(userInput: updatedProfileInput):User
         deleteProfile(userId: String!):User
         updateProfile(userInput: updatedProfileInput):User
