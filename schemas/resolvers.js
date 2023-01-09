@@ -83,6 +83,19 @@ const resolvers = {
             return {token, user};
         },
 
+        resetPassword: async (parent, {email, newPassword}) => {
+            try {
+                const updatedUser = await User.findOneAndUpdate(
+                    {email: email},
+                    {password: newPassword},
+                    {new: true}
+                );
+                return updatedUser;
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         addProfile: async (parent, {userInput}) => {
             try {
                 const user = await User.create(userInput);
