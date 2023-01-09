@@ -63,11 +63,13 @@ userSchema.pre('save', async function(next) {
 });
 
 userSchema.pre('findOneAndUpdate', async function(next) {
+    const saltRounds = 15;
+    if (this._update.hasOwnProperty('password')) {
+        this._update.password = await bcrypt.hash(this._update.password, saltRounds);
+    }
     if (this._update.hasOwnProperty('$set')) {
-        if (this._update.$set.hasOwnProperty('password')) {
-            const saltRounds = 15;
+        if (this._update.$set.hasOwnProperty('password'))
             this._update.$set.password = await bcrypt.hash(this._update.$set.password, saltRounds);
-        }
     }
     next();
 })
