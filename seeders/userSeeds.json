@@ -5,61 +5,7 @@
     "password": "thepassword",
     "firstName": "Pepe",
     "lastName": "La Rana",
-    "isAdmin": true,
-    "userMeasures": [
-      {
-        "date": "10/07/2022",
-        "weight": "74.80",
-        "bodyFatPercentage": "21.11%",
-        "leanBodyWeight": "59.01",
-        "bodyFat": "15.79",
-        "bodyType": "Durnin"
-      },
-      {
-        "date": "09/09/2022",
-        "weight": "75.80",
-        "bodyFatPercentage": "17.86%",
-        "leanBodyWeight": "62.26",
-        "bodyFat": "13.54",
-        "bodyType": "Durnin"
-      },
-      {
-        "date": "10/11/2022",
-        "weight": "74.80",
-        "bodyFatPercentage": "21.11%",
-        "leanBodyWeight": "59.01",
-        "bodyFat": "15.79",
-        "bodyType": "Durnin"
-      }
-    ],
-    "userDiets": [
-      {
-        "eTag": "kgdsfubsdf687351we",
-        "fileName": "Pepe La Rana Diet(16-11-2022)"
-      },
-      {
-        "eTag": "kgdsfubsdf687351we",
-        "fileName": "Pepe La Rana Diet(16-12-2022)"
-      },
-      {
-        "eTag": "kgdsfubsdf687351we",
-        "fileName": "Pepe La Rana Diet(16-01-2023)"
-      }
-    ],
-    "userTrainings": [
-      {
-        "eTag": "kgdsfubsdf687351we",
-        "fileName": "Pepe La Rana Training(16-11-2022)"
-      },
-      {
-        "eTag": "kgdsfubsdf687351we",
-        "fileName": "Pepe La Rana Training(16-12-2022)"
-      },
-      {
-        "eTag": "kgdsfubsdf687351we",
-        "fileName": "Pepe La Rana Training(16-01-2023)"
-      }
-    ]
+    "isAdmin": true
   },
   {
     "username": "usuario2",
