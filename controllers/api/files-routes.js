@@ -2,7 +2,7 @@ const router = require('express').Router();
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
-const {S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand} = require('@aws-sdk/client-s3');
+const {S3Client, PutObjectCommand, GetObjectCommand, DeleteObjectCommand, ListObjectsV2Command} = require('@aws-sdk/client-s3');
 const {getSignedUrl} = require('@aws-sdk/s3-request-presigner');
 require('dotenv').config();
 
@@ -46,6 +46,39 @@ router.post('/deleteDiet', async (req, res) => {
     });
     const response = await s3Client.send(deleteObject);
     res.status(response.$metadata.httpStatusCode).send();
+});
+
+router.post('/deleteUserFiles', async (req, res) => {
+    let listObjects = new ListObjectsV2Command({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Prefix: `diets/${req.body.userId}`
+    });
+    let listResponse = await s3Client.send(listObjects);
+    if ('Contents' in listResponse) {
+        for (const key of listResponse.Contents) {
+            const deleteObject = new DeleteObjectCommand({
+                Bucket: process.env.AWS_S3_BUCKET,
+                Key: key.Key
+            });
+            await s3Client.send(deleteObject);
+        }
+    }
+
+    listObjects = new ListObjectsV2Command({
+        Bucket: process.env.AWS_S3_BUCKET,
+        Prefix: `trainings/${req.body.userId}`
+    });
+    listResponse = await s3Client.send(listObjects);
+    if ('Contents' in listResponse) {
+        for (const key of listResponse.Contents) {
+            const deleteObject = new DeleteObjectCommand({
+                Bucket: process.env.AWS_S3_BUCKET,
+                Key: key.Key
+            });
+            await s3Client.send(deleteObject);
+        }
+    }
+    res.status(200).send();
 });
 
 router.post('/downloadTraining', async (req, res) => {
